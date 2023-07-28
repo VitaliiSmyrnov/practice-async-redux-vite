@@ -1,15 +1,20 @@
 import { nanoid } from "@reduxjs/toolkit";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { getContacts, addContact } from "src/redux/contactsSlice";
+
+import { addContact } from "src/redux/contactsSlice";
+
+import { selectContacts } from "src/redux/selectors";
+
 import { StyledButton, StyledForm } from "./ContactForm.styled";
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
     const form = e.target;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
@@ -40,6 +45,7 @@ export const ContactForm = () => {
           required
         />
       </label>
+
       <label>
         Number
         <input
