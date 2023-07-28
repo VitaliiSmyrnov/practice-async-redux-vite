@@ -1,5 +1,7 @@
 import { Toaster } from "react-hot-toast";
+
 import { ContactForm, Filter, ContactList } from "src/components";
+
 import {
   StyledContactsBox,
   StyledContainer,
