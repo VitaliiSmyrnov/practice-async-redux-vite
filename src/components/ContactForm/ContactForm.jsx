@@ -1,8 +1,7 @@
-import { nanoid } from "@reduxjs/toolkit";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addContact } from "src/redux/contactsSlice";
+import { addContact } from "src/redux/operations";
 
 import { selectContacts } from "src/redux/selectors";
 
@@ -17,8 +16,7 @@ export const ContactForm = () => {
 
     const form = e.target;
     const name = form.elements.name.value;
-    const number = form.elements.number.value;
-    const id = nanoid(5);
+    const phone = form.elements.phone.value;
 
     const isExistName = contacts
       .map((contact) => contact.name.toLowerCase())
@@ -26,9 +24,7 @@ export const ContactForm = () => {
 
     const message = `${name} is already in contacts`;
 
-    isExistName
-      ? toast.error(message)
-      : dispatch(addContact({ id, name, number }));
+    isExistName ? toast.error(message) : dispatch(addContact({ name, phone }));
 
     form.reset();
   };
@@ -50,7 +46,7 @@ export const ContactForm = () => {
         Number
         <input
           type="tel"
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
