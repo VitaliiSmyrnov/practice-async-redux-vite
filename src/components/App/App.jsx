@@ -1,4 +1,9 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import { Toaster } from "react-hot-toast";
+
+import { fetchContacts } from "src/redux/operations";
 
 import { ContactForm, Filter, ContactList } from "src/components";
 
@@ -9,6 +14,12 @@ import {
 } from "./App.styled";
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
     <StyledWrapper>
       <StyledContainer>
